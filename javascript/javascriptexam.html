@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Exam</title>
+
+    <style>
+        div#test {
+            border: 5px solid blue;
+            color: green;
+            background: linear-gradient(to left, red, green);
+            color: white;
+            font-size: 20px;
+            padding: 10px 40px 40px 40px;
+        }
+
+        .border {
+            border: 5px solid blue;
+            width: 15%;
+            color: blue;
+            font-size: 20px;
+        }
+
+        .border1 {
+            border: 5px solid blue;
+            width: 20%;
+            color: red;
+            font-size: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        function countDown(secs, elem) {
+            var element = document.getElementById(elem);
+            element.innerHTML = "Time Left: " + secs + " seconds";
+            if (secs < 1) {
+                clearTimeout(timer);
+                element.innerHTML = '<h2>Exam Complete</h2>';
+                test.innerHTML = "<h2><center>You Got Score:" + (Correct / questions.length) * 100 + "%" + "<br>" +
+                    "Number of Correct Question is:" + Correct + "<br>" +
+                    "Total Number Question is: " +
+                    questions.length + "</centert></h2>";
+                _("test_status").innerHTML = "<center> Test is Completed</center>";
+                element.innerHTML += '<a href="log.html">Click Here Now</a>';
+                //window.location="logout.html";
+            }
+            secs--;
+            var timer = setTimeout('countDown(' + secs + ', "' + elem + '")', 1000);
+        }
+    </script>
+
+    <div id="clock" align="center" class="border"> </div>
+    <script type="text/javascript">
+        setInterval(displayclock, 500);
+        function displayclock() {
+            var time = new Date();
+            var hrs = time.getHours();
+            var min = time.getMinutes();
+            var sec = time.getSeconds();
+            if (((2 + time) - time) > 0) {
+                hrs = (2 + time) - time;
+            }
+            document.getElementById('clock').innerHTML = "Time is:" + hrs + ':' + min + ':' + sec;
+        }
+    </script>
+    <div id="status" class="border1"></div>
+
+
+    <script type="text/javascript">
+        var x = 20;
+        countDown(x, "status");
+    </script>
+
+    <script>
+        var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, Correct = 0;
+        var questions = [
+            ["if a,b,c are three distinct real numbers such that 𝒂𝟑+𝒃𝟑+𝒄𝟑=3abcthen (𝒂+𝒃)𝟐𝟐𝒂𝒃+(𝒃+𝒄)𝟐𝟐𝒃𝒄+(𝒄+𝒂)𝟐𝟐𝒄𝒂=?",
+                "3", "1", "1.5", "2", "C"],
+            ["If 2x + 3y + 4z =11, 8x³ + 27y³ + 64z³ = 105 and xyz = 1, then the value 4x² + 9y² + 16z² – 6xy – 12yz – 8xz is:",
+                "3", "4", "5", "6", "A"],
+            ["Find the simplified value of 𝒙𝟒+𝒙𝟐+𝟏𝒙𝟐+𝒙+𝟏",
+                "𝒙𝟐−𝟐𝒙+𝟏", "𝒙𝟐+𝒙+𝟏", "𝒙𝟐−𝒙+𝟏", "𝒙𝟐+𝟐𝒙+𝟏", "C"],
+            [" If 𝒙𝟐 − 𝟑𝒙 + 𝟏 = 𝟎, 𝒕𝒉𝒆𝒏 𝒕𝒉𝒆 𝒗𝒂𝒍𝒖𝒆 of 𝒙𝟒+𝟏/𝒙𝟐 𝒙𝟐+𝟓𝒙+𝟏 is: ",
+                "𝟗/4", "𝟐𝟕/8", "𝟓/2", "2", "A"]
+        ];
+
+        function _(shyam) {
+            return document.getElementById(shyam);
+        }
+        function renderQuestion() {
+            let flase;
+            test = _("test");
+            if (pos >= questions.length) {
+                test.innerHTML = "<h2><center>You Got Score:" + (Correct / questions.length) * 100 + "%" + "<br>" +
+                    "Number of Correct Question is:" + questions.length + "</center></h2>";
+                _("test_status").innerHTML = "<center> Test is Completed</ceneter>";
+                pos = 0;
+                Correct = 0;
+            
+            return flase;
+        }
+        _("test_status").innerHTML = "Question " + (pos + 1) + " of " + questions.length;
+        question = questions[pos][0];
+        chA = questions[pos][1];
+        chB = questions[pos][2];
+        chC = questions[pos][3];
+        chD = questions[pos][4];
+        test.innerHTML = "<h3>" + "Qustion:" + (pos + 1) + ")" + " " + question + "</h3>";
+        test.innerHTML += "<input type='radio' name='choices' value='A'>" + chA + "<br>";
+        test.innerHTML += "<input type='radio' name='choices' value='B'>" + chB + "<br>";
+        test.innerHTML += "<input type='radio' name='choices' value='C'>" + chC + "<br>";
+        test.innerHTML += "<input type='radio' name='choices' value='D'>" + chD + "<br><br>";
+        test.innerHTML += "<button onclick='checkAnswer ()'>Save and Next Question</button>" + " ";
+        test.innerHTML += "<button onclick='back ()'>Previous Question</button>";
+        }
+        function back() {
+            
+            choices = document.getElementsByName("choices");
+            for (var i = 0; i < choices.length; i++) {
+                if (choices[i].checked) {
+                    choice = choices[i].value
+                }
+            }
+            if (choice == questions[pos][5]) {
+                Correct--;
+            }
+            if (pos > 0) {
+                pos--;
+            } else {
+                pos++;
+            }
+           renderQuestion();
+        }
+        function checkAnswer() {
+            
+            choices = document.getElementsByName("choices");
+            for (var i = 0; i < choices.length; i++) {
+                if (choices[i].checked) {
+                    choice = choices[i].value
+                }
+            }
+            if (choice == questions[pos][5]) {
+                Correct++;
+            }
+            pos++;
+            renderQuestion();
+        }
+        window.addEventListener("load", renderQuestion, false);
+    </script>
+</head>
+
+<body>
+    <h2 id="test_status"> </h2>
+    <div id="test"></div>
+</body>
+
+</html>

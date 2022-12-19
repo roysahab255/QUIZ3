@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCQ Exam</title>
+</head>
+<style>
+    * {
+        box-sizing: border;
+    }
+
+    body {
+        margin: 0;
+        font-family: Times New Roman;
+    }
+
+    .topnav {
+        overflow: hidden;
+        background: linear-gradient(to left, red, blue);
+
+    }
+
+    .topnavbtn {
+        overflow: hidden;
+        background: linear-gradient(to left, red, green);
+        color: white;
+        font-size: 30px;
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 0px 40px;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .topnav a:hover {
+        background-color: yellow;
+        color: red;
+        border-radius: 9px;
+    }
+
+    .topnav a.active {
+        background-color: #2196f6;
+        color: white;
+    }
+
+    .topnav .search-container {
+        float: right;
+    }
+
+    .topnav input[type=text] {
+        padding: 6px;
+        margin-top: 8px;
+        margin-top: 8px;
+        font-size: 17px;
+        border: none;
+
+    }
+
+    .topnav .search-container button {
+        float: right;
+        padding: 6px 10px;
+        margin-top: 8px;
+        margin-right: 16px;
+        background: #ddd;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+
+    }
+
+    .topnav .search-container button:hover {
+        background: #ccc;
+    }
+
+    @media screen and (max-width:600px) {
+        .topnav .search-container {
+            float: none;
+        }
+
+        .topnav a,
+        .topnav input[type=text],
+        .topnav .search-container button {
+            float: none;
+            display: block;
+            text-align: left;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            padding: 14px;
+
+
+        }
+
+        .topnav input[type=text] {
+            border: 1px solid #ccc;
+        }
+
+    }
+</style>
+
+<body>
+    <div class="topnav" align="center">
+        <form>
+            <input type="text" id="username" placeholder="Enter Username" /><br><br>
+            <input type="text" id="password" placeholder="Enter Roll NO:" /><br><br><br><br><br><br><br>
+            <button class="topnavbtn" type="button" onclick="login()">Login Here</button><br>
+            <a class="topnavbtn" href="index.html">Go Home</a>
+        </form>
+    </div>
+    <script>
+        var passdata = [
+            {
+                username: "shyam",
+                password: "123"
+            },
+            {
+                username: "divya",
+                password: "12345"
+            },
+            {
+                username: "shyam",
+                password: "123456"
+            },
+            {
+                username: "ronak",
+                password: "12376"
+            }
+        ];
+        function login() {
+            var username1 = document.getElementById("username").value
+            var password1 = document.getElementById("password").value
+            for (i = 0; i < passdata.length; i++) {
+                if (username1 == passdata[i].username && password1 == passdata[i].password) {
+                    alert(username1 + "login Success");
+                    window.location = "javascriptexam.html";
+                    return
+                }
+            }
+            alert("login faild");
+        }
+    </script>
+</body>
+
+</html>
